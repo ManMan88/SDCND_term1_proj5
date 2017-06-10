@@ -2,14 +2,10 @@
 #%% Import
 import glob
 import numpy as np
-import cv2
-import matplotlib.image as mpimg
-import matplotlib.pyplot as plt
 from sklearn.svm import LinearSVC, SVC
 from sklearn.preprocessing import StandardScaler
-from skimage.feature import hog
 from sklearn.model_selection import train_test_split, GridSearchCV
-from functions import *
+from functions import extract_features
 import time
 import pickle
 
@@ -77,10 +73,10 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 #%% Train
 # Use a linear SVC 
-#svc = LinearSVC()
+svc = LinearSVC()
 
 # Use a non-linear SVC
-svc = SVC(C=1.0, kernel='rbf', gamma='auto')
+#svc = SVC(C=1.0, kernel='rbf', gamma='auto')
 
 # Optimize SVC
 #parameters = {'C':[1,2,3,4,5]}
@@ -99,8 +95,10 @@ print('Test Accuracy of SVC = ', round(svc.score(X_test, y_test), 4))
 t=time.time()
 
 # Save the model
-with open('./classifiers/rbfSvcYCrCb2.pkl', 'wb') as fid:
-    pickle.dump(svc, fid)    
+with open('./classifiers/linearSvcYCrCb2.pkl', 'wb') as fid:
+    pickle.dump(svc, fid)
+with open('./classifiers/linearSvcYCrCb2SCALAR.pkl', 'wb') as fid:
+    pickle.dump(X_scaler, fid)     
 
 #with open('./classifiers/rbfSvcYCrCb.pkl', 'rb') as fid:
 #    gnb_loaded = pickle.load(fid)
