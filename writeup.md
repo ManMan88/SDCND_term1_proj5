@@ -1,4 +1,4 @@
-**Vehicle Detection Project Writeup**
+## Vehicle Detection Project Writeup
 
 The goals / steps of this project are the following:
 
@@ -17,9 +17,9 @@ The goals / steps of this project are the following:
 [image5]: ./output_images/hot2.jpg
 [image6]: ./output_images/hot5.jpg
 [image7]: ./output_images/hot1.jpg
-[image8]: ./output_images/heat.png
-[image9]: ./output_images/labels.png
-[image10]: ./output_images/final_img.png
+[image8]: ./output_images/heat.jpg
+[image9]: ./output_images/labels.jpg
+[image10]: ./output_images/final_img.jpg
 [video1]: ./output_videos/project_video.mp4
 
 ## Rubric Points
@@ -89,18 +89,20 @@ Here's an example result showing the heatmap from a series of frames of video, t
 ![alt text][image8]
 
 Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
+
 ![alt text][image9]
 
 Here the resulting bounding boxes are drawn onto the last frame in the series:
+
 ![alt text][image10]
 
 
 
 ---
 
-###Discussion
+### Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 The main problem I faced was that the pipeline took alot of time to process each image. I could have solved it by calculating the HOG features once for each image (more accurately, as the number of window scalses), and using the corresponding parameters for each search window. Furthermmore, I could have used a smarter search windows distribution which will use less windows, and possibly using adaptive windows distributions, such as once a car was found, then add more windows in its area.
 In the final results, the found cars windows where a little wobbly and surrounded a bigger area than the car itself. I think the size of the window could be optimized by furthere search inside the found window, and in this way finding a more accurate window. Regarding the wobbliness, I could have improve the results by using the same algorithm I suggested, and also by creating a buffer that stores the final window size and applying some kind of filter on the window size (the same could be done with location) -> such as Kalman filter.
